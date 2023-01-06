@@ -1,4 +1,4 @@
-name: Build and deploy to ec2 instance
+name: Build and push to container registry
 
 on:
    push:
