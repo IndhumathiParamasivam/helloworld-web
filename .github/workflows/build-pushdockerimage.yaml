@@ -82,14 +82,19 @@ jobs:
         run: |
             helm install release-${{ github.run_number }} kubedeployment/simplechart --set labels.versionrelease="v${{ github.run_number }}"
       
-      - name: Blue-Green Ingress deployment
-        run: |
-            kubectl apply -f kubedeployment/blue-ingress.yaml
-            kubectl apply -f kubedeployment/green-ingress.yaml
+      #- name: Blue-Green Ingress deployment
+        #run: |
+            #kubectl apply -f kubedeployment/blue-ingress.yaml
+            #kubectl apply -f kubedeployment/green-ingress.yaml
       
-      - name: publicingress deployment
+      #- name: publicingress deployment
+        #run: |
+            #kubectl apply -f kubedeployment/publicingress.yaml
+      - name: Map blue ingress and green ingress
         run: |
-            kubectl apply -f kubedeployment/publicingress.yaml
+            export blueversion=${{ github.run_number }}-1;
+            kubectl patch ingress blue-hello-world-ingress  -p "{\"spec\": {\"rules\": [{\"host\": \"*.amazonaws.com\",\"http\": {\"paths\": [{\"path\": \"/\",\"pathType\": \"Prefix\",\"backend\": {\"service\": {\"name\": \"hello-world-v$blueversion-service\",\"port\": {\"number\": 80}}}}]}}]}}"
+            kubectl patch ingress green-hello-world-ingress  -p "{\"spec\": {\"rules\": [{\"host\": \"*.amazonaws.com\",\"http\": {\"paths\": [{\"path\": \"/\",\"pathType\": \"Prefix\",\"backend\": {\"service\": {\"name\": \"hello-world-v${{ github.run_number }}-service\",\"port\": {\"number\": 80}}}}]}}]}}"
 
 
       
