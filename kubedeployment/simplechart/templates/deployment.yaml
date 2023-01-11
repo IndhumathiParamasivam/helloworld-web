@@ -22,3 +22,5 @@ spec:
         image: "ghcr.io/indhumathiparamasivam/helloworld-web:master-{{ .Values.labels.versionrelease }}"
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
