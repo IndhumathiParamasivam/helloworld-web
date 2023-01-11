@@ -9,7 +9,7 @@ metadata:
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=app
 spec:
   rules:
-    - host: "*.green.amazonaws.com"
+    - host: "*.amazonaws.com"
       http:
         paths:
           - path: /

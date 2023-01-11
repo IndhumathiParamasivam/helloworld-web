@@ -9,13 +9,13 @@ metadata:
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=app
 spec:
   rules:
-    - host: "*.blue.amazonaws.com"
+    - host: "*.amazonaws.com"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: "hello-world-v27-service"
+                name: "hello-world-v28-service"
                 port:
                   number: 80
