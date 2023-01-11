@@ -40,8 +40,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}-v${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
 
-    helm-deploy:
 
+
+
+    helm-deploy:
      needs: build-run
      runs-on: ubuntu-latest
      permissions:
@@ -62,38 +64,23 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
 
+
       - name: Updating kubeconfig to connect to cluster
         run: |
            aws sts get-caller-identity
            aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
            ls -la
            
-      - name: test runcommand
-        run: |
-             kubectl get nodes
-             kubectl get pods -n default
-
       - name: Validating Chart 
         run: |
             helm lint kubedeployment/simplechart
             helm template kubedeployment/simplechart
 
-            helm install  V${{ github.run_number }} kubedeployment/simplechart --dry-run
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
-      
-      - name: Updating kubeconfig to connect to cluster
-        run: |
-           aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
-
+            helm install  release${{ github.run_number }} kubedeployment/simplechart --dry-run
+     
       - name: Installation Chart
         run: |
-            helm install V${{ github.run_number }} kubedeployment/simplechart --set labels.versionrelease="v${{ github.run_number }}"
+            helm install release-${{ github.run_number }} kubedeployment/simplechart --set labels.versionrelease="v${{ github.run_number }}"
             
 
       
