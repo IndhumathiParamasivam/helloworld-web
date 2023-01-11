@@ -1,14 +1,16 @@
-name : ingress switch
+name : ingress-switch
+
 on:
   workflow_dispatch:
     inputs:
         version:
-        description: 'Updated version'
-        required: true
-        default: 'v'
+          description: 'Updated version'
+          required: true
+          default: 'v'
+          type: string
 
 jobs:
-  ingress-switch:
+  publicingress-switch:
     runs-on: ubuntu-latest
     steps:
     
