@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
       - name: "{{ .Values.labels.app}}-container"
-        image: "ghcr.io/indhumathiparamasivam/helloworld-web:master-{{ .Values.labels.versionrelease }}"
+        image: "ghcr.io/indhumathiparamasivam/helloworld-web:master-v{{ .Values.labels.versionrelease }}"
         ports:
         - containerPort: 80
