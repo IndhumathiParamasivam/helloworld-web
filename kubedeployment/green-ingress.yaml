@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: "hello-world-ingress"
+  name: "green-hello-world-ingress"
   #namespace: default
   annotations:
     kubernetes.io/ingress.class: alb
@@ -9,13 +9,13 @@ metadata:
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=app
 spec:
   rules:
-    - host: "*.amazonaws.com"
+    - host: "*.green.amazonaws.com"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: "hello-world-V1-service"
+                name: "hello-world-v26-service"
                 port:
                   number: 80

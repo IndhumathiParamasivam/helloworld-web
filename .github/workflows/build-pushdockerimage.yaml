@@ -81,6 +81,14 @@ jobs:
       - name: Installation Chart
         run: |
             helm install release-${{ github.run_number }} kubedeployment/simplechart --set labels.versionrelease="v${{ github.run_number }}"
-            
+      
+      - name: Blue-Green Ingress deployment
+        run: |
+            kubectl apply -f blue-ingress.yaml
+            kubectl apply -f green-ingress.yaml
+      
+      - name: publicingress deployment
+        run: |
+            kubectl apply -f publicingress.yaml
 
       
