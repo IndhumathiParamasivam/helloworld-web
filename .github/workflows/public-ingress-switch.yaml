@@ -1,6 +1,7 @@
 name : ingress switch
 on:
   workflow_dispatch:
+    inputs:
         version:
         description: 'Updated version'
         required: true
@@ -10,9 +11,7 @@ jobs:
   ingress-switch:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-            
+    
       - name: Helm-Installation
         run: |
             sudo apt install openssl -y
