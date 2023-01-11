@@ -1,4 +1,4 @@
-name: ingress switch
+name : ingress switch
 on:
   workflow_dispatch:
         version:
