@@ -65,7 +65,7 @@ jobs:
       - name: Updating kubeconfig to connect to cluster
         run: |
            aws sts get-caller-identity
-           aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
+           aws eks --region ap-northeast-1 update-kubeconfig --name mycluster --role-arn ${{ secrets.ROOT_AWSACCESS }}
            ls -la
            
       - name: test runcommand
