@@ -69,12 +69,12 @@ jobs:
 
       - name: Validating Chart 
         run: |
-            helm lint simplechart
-            helm template simplechart
+            helm lint kubedeployment/simplechart
+            helm template kubedeployment/simplechart
       
       - name: Installation Chart
         run: |
-            helm install V${{ github.run_number }} simplechart -f values.yaml --set labels.versionrelease="V${{ github.run_number }}"
+            helm install V${{ github.run_number }} kubedeployment/simplechart -f values.yaml --set labels.versionrelease="V${{ github.run_number }}"
             
 
       
