@@ -67,4 +67,14 @@ jobs:
             sudo apt install openssl -y
             sudo snap install helm --classic
 
+      - name: Validating Chart 
+        run: |
+            helm lint simplechart
+            helm template simplechart
+      
+      - name: Installation Chart
+        run: |
+            helm install V${{ github.run_number }} simplechart -f values.yaml --set labels.versionrelease="V${{ github.run_number }}"
+            
+
       

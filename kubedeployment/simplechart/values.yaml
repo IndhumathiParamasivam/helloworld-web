@@ -1,0 +1,4 @@
+labels:
+    app: "hello-world"
+    versionrelease: "V1"
+replicaset: 2
