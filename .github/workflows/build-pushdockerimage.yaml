@@ -50,7 +50,17 @@ jobs:
      steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+            
+      - name: Helm-Installation
+        run: |
+            sudo apt install openssl -y
+            sudo snap install helm --classic
+
+      - name: Validating Chart 
+        run: |
+            helm lint kubedeployment/simplechart
+            helm template kubedeployment/simplechart
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -61,20 +71,7 @@ jobs:
       - name: Updating kubeconfig to connect to cluster
         run: |
            aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
-      
-      - name: Helm-Installation
-        run: |
-            sudo apt install openssl -y
-            sudo snap install helm --classic
 
-      - name: Validating Chart 
-        run: |
-            helm lint kubedeployment/simplechart
-            helm template kubedeployment/simplechart
-      - name: Updating kubeconfig to connect to cluster
-        run: |
-           aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
-           
       - name: Installation Chart
         run: |
             helm install V${{ github.run_number }} kubedeployment/simplechart --set labels.versionrelease="v${{ github.run_number }}"
