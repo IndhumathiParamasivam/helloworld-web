@@ -74,7 +74,7 @@ jobs:
       
       - name: Installation Chart
         run: |
-            helm install V${{ github.run_number }} kubedeployment/simplechart -f values.yaml --set labels.versionrelease="V${{ github.run_number }}"
+            helm install V${{ github.run_number }} kubedeployment/simplechart --set labels.versionrelease="V${{ github.run_number }}"
             
 
       
