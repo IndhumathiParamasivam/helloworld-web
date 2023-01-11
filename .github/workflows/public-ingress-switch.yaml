@@ -36,7 +36,7 @@ jobs:
         run: |
            version="${{ inputs.version }}"
            echo $version
-           version_suffix=${version:1}"
+           version_suffix="${version:1}"
            echo $version_suffix
            oldversion=$(($version_suffix-2))
            echo $oldversion
