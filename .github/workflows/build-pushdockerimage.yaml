@@ -84,11 +84,12 @@ jobs:
       
       - name: Blue-Green Ingress deployment
         run: |
-            kubectl apply -f blue-ingress.yaml
-            kubectl apply -f green-ingress.yaml
+            kubectl apply -f kubedeployment/blue-ingress.yaml
+            kubectl apply -f kubedeployment/green-ingress.yaml
       
       - name: publicingress deployment
         run: |
-            kubectl apply -f publicingress.yaml
+            kubectl apply -f kubedeployment/publicingress.yaml
+
 
       
