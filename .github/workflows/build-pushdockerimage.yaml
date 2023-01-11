@@ -65,6 +65,6 @@ jobs:
       - name: Helm-Installation
         run: |
             sudo apt install openssl -y
-            sudo snap install helm -y
+            sudo snap install helm
 
       
