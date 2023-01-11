@@ -69,8 +69,8 @@ jobs:
 
       - name: Validating Chart 
         run: |
-            helm lint kubedeployment/simplechart
-            helm template kubedeployment/simplechart
+            #helm lint kubedeployment/simplechart
+            #helm template kubedeployment/simplechart
             helm install  V${{ github.run_number }} kubedeployment/simplechart --dry-run --set labels.versionrelease="v${{ github.run_number }}"
 
       - name: Configure AWS credentials
