@@ -67,8 +67,8 @@ jobs:
            aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
       - name: test runcommand
         run: |
-            kubectl get nodes
-            kubectl get pods -n default
+            sudo kubectl get nodes
+            sudo kubectl get pods -n default
 
       - name: Validating Chart 
         run: |
