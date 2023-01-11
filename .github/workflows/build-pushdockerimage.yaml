@@ -57,6 +57,7 @@ jobs:
         run: |
             sudo apt install openssl -y
             sudo snap install helm --classic
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -69,7 +70,6 @@ jobs:
         run: |
            aws sts get-caller-identity
            aws eks --region ap-northeast-1 update-kubeconfig --name mycluster
-           ls -la
            
       - name: Validating Chart 
         run: |
@@ -92,7 +92,7 @@ jobs:
             #kubectl apply -f kubedeployment/publicingress.yaml
       - name: Map blue ingress and green ingress
         run: |
-            export blueversion=${{ github.run_number }}-1;
+            blueversion=$((${{ github.run_number }}-1))
             kubectl patch ingress blue-hello-world-ingress  -p "{\"spec\": {\"rules\": [{\"host\": \"*.amazonaws.com\",\"http\": {\"paths\": [{\"path\": \"/\",\"pathType\": \"Prefix\",\"backend\": {\"service\": {\"name\": \"hello-world-v$blueversion-service\",\"port\": {\"number\": 80}}}}]}}]}}"
             kubectl patch ingress green-hello-world-ingress  -p "{\"spec\": {\"rules\": [{\"host\": \"*.amazonaws.com\",\"http\": {\"paths\": [{\"path\": \"/\",\"pathType\": \"Prefix\",\"backend\": {\"service\": {\"name\": \"hello-world-v${{ github.run_number }}-service\",\"port\": {\"number\": 80}}}}]}}]}}"
 
