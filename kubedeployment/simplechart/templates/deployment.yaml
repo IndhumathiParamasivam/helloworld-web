@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ .Values.labels.app}}-{{ .Values.labels.versionrelease }}"
+  name: "{{ .Values.labels.app }}-{{ .Values.labels.versionrelease }}"
   labels:
-    app: {{ .Values.labels.app}}
+    app: {{ .Values.labels.app }}
     version: {{ .Values.labels.versionrelease }}
 spec:
-  replicas: {{ .Values.replicaset}}
+  replicas: {{ .Values.replicaset }}
   selector:
     matchLabels:
-      app: {{ .Values.labels.app}}
+      app: {{ .Values.labels.app }}
       version: {{ .Values.labels.versionrelease }}
   template:
     metadata:
       labels:
-        app: {{ .Values.labels.app}}
+        app: {{ .Values.labels.app }}
         version: {{ .Values.labels.versionrelease }}
     spec:
       containers:
-      - name: "{{ .Values.labels.app}}-container"
-        image: "ghcr.io/indhumathiparamasivam/helloworld-web:master-v{{ .Values.labels.versionrelease }}"
+      - name: "{{ .Values.labels.app }}-container"
+        image: "ghcr.io/indhumathiparamasivam/helloworld-web:master-{{ .Values.labels.versionrelease }}"
         ports:
         - containerPort: 80
