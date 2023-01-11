@@ -34,7 +34,7 @@ jobs:
            
       - name: public ingress switch
         run: |
-           export oldversion=${{ inputs.version }}-2;
+           oldversion=$((${{ inputs.version }}-2))
            kubectl patch ingress hello-world-ingress  -p "{\"spec\": {\"rules\": [{\"host\": \"*.amazonaws.com\",\"http\": {\"paths\": [{\"path\": \"/\",\"pathType\": \"Prefix\",\"backend\": {\"service\": {\"name\": \"hello-world-${{ inputs.version }}-service\",\"port\": {\"number\": 80}}}}]}}]}}"
            helm uninstall release-$oldversion
  
