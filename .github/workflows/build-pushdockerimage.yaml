@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./helloworld-web/Dockerfile
+          #file: ./helloworld-web/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}-v${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
